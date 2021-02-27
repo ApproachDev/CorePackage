@@ -4,24 +4,6 @@
 
 import Foundation
 
-fileprivate var onboardingWasShown = false
-fileprivate var isAutorized = false
-
-class AppState {
-    enum FlowInstruction {
-        case main, auth, onboarding
-    }
-
-    static var flowInstruction: FlowInstruction {
-        switch (onboardingWasShown, isAutorized) {
-            case (_, false): return .auth
-            case (false, true): return .onboarding
-            case (true, true): return .main
-        }
-    }
-}
-
-
 public final class ApplicationCoordinator: BaseCoordinator {
 
     private let coordinatorFactory: CoordinatorFactoryProtocol
@@ -36,23 +18,27 @@ public final class ApplicationCoordinator: BaseCoordinator {
             switch option {
                 case .onboarding: runOnboardingFlow()
                 case .signUp: runAuthFlow()
-                default: childCoordinators.forEach { coordinator in //TODO: refactor into runMain with option
+                default: childCoordinators.forEach { coordinator in
                     coordinator.start(with: option)
                 }
             }
         } else {
-            switch AppState.flowInstruction {
-                case .onboarding: runOnboardingFlow()
-                case .auth: runAuthFlow()
-                case .main: runMainFlow()
-            }
+            runDependOn(flowInstruction: AppState.shared.flowInstruction)
+        }
+    }
+
+    private func runDependOn(flowInstruction: AppState.FlowInstruction) {
+        switch flowInstruction {
+            case .onboarding: runOnboardingFlow()
+            case .auth: runAuthFlow()
+            case .main: runMainFlow()
         }
     }
 
     private func runAuthFlow() {
         let coordinator = coordinatorFactory.makeAuthCoordinator(router: router)
         coordinator.finishFlow = { [weak self, weak coordinator] in
-            isAutorized = true
+            AppState.shared.setAuthorized(true)
             self?.start(with: nil)
             self?.removeDependency(coordinator)
         }
@@ -63,7 +49,7 @@ public final class ApplicationCoordinator: BaseCoordinator {
     private func runOnboardingFlow() {
         let coordinator = coordinatorFactory.makeOnboardingCoordinator(router: router)
         coordinator.finishFlow = { [weak self, weak coordinator] in
-            onboardingWasShown = true
+            AppState.shared.onboardingDidShow()
             self?.start(with: nil)
             self?.removeDependency(coordinator)
         }
