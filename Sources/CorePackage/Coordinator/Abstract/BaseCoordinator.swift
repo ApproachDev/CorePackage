@@ -1,22 +1,22 @@
 //
-//  BaseCoordinator.swift
-//  
-//
 //  Created by Vadim Zhuk on 19.12.20.
 //
 
-import UIKit
+import Foundation
 
 open class BaseCoordinator: CoordinatorProtocol {
-    public init(router: Router){
-        self.router = router
-    }
 
-    public var router: Router
+    public let router: Router
+    public let factory: ViewControllerFactoryProtocol
 
     public var childCoordinators: [CoordinatorProtocol] = [] //TODO: Refactor into Set
 
-    open func start(with option: DeepLinkOption? = nil) {}
+    public init(router: Router, factory: ViewControllerFactoryProtocol = ViewControllerFactory()){
+        self.factory = factory
+        self.router = router
+    }
+
+    public func start(with option: DeepLinkOption? = nil) {}
 
     // add only unique object - refactor into Set
     func addDependency(_ coordinator: CoordinatorProtocol) {
@@ -40,4 +40,3 @@ open class BaseCoordinator: CoordinatorProtocol {
         }
     }
 }
-

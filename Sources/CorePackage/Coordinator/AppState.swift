@@ -1,7 +1,4 @@
 //
-//  AppState.swift
-//  
-//
 //  Created by Vadim Zhuk on 27.02.21.
 //
 
