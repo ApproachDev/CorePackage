@@ -26,11 +26,9 @@ public final class ApplicationCoordinator: BaseCoordinator {
 
     private let coordinatorFactory: CoordinatorFactoryProtocol
 
-    private let router: Router
-
     public init(router: Router, factory: CoordinatorFactoryProtocol) {
         self.coordinatorFactory = factory
-        self.router = router
+        super.init(router: router)
     }
 
     public override func start(with option: DeepLinkOption?) {

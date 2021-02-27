@@ -7,6 +7,14 @@
 
 import Foundation
 
-public protocol AuthenticationCoordinatorProtocol: class {
-  var finishFlow: (() -> Void)? { get set }
+public protocol AuthenticationCoordinatorProtocol: AuthCoordinatorDelegate {
+    var finishFlow: (() -> Void)? { get set }
+}
+
+public protocol AuthCoordinatorDelegate: AnyObject {
+    func completeLogin()
+    func completeSignUp()
+
+    func showSignUp()
+    func showLogin()
 }

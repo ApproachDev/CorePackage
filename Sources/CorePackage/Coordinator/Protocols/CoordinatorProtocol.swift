@@ -8,6 +8,9 @@
 import Foundation
 
 public protocol CoordinatorProtocol: AnyObject {
+
+    var router: Router { get }
+    
     var childCoordinators: [CoordinatorProtocol] { get set } //TODO: Refactor into Set
 //    var parentCoordinator: Coordinator? { get set }
 

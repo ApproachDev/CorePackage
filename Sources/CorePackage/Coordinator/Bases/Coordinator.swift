@@ -8,7 +8,11 @@
 import UIKit
 
 open class BaseCoordinator: CoordinatorProtocol {
-    public init(){}
+    public init(router: Router){
+        self.router = router
+    }
+
+    public var router: Router
 
     public var childCoordinators: [CoordinatorProtocol] = [] //TODO: Refactor into Set
 

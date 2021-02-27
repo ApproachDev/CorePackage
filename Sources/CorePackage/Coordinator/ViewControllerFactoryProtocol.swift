@@ -17,22 +17,20 @@ public protocol ViewControllerFactoryProtocol {
 }
 
 public protocol SignupScreen: UIViewController {
-    var onCompleteSignup: (() -> Void)? { get set }
-    var onSwitchToLoginButtonTap: (() -> Void)? { get set }
+    var delegate: AuthCoordinatorDelegate? { get set }
 }
 
 public protocol LoginScreen: UIViewController {
-    var onCompleteLogin: (() -> Void)? { get set }
-    var onSwitchToSignupButtonTap: (() -> Void)? { get set }
+    var delegate: AuthCoordinatorDelegate? { get set }
 }
 
 public protocol OnboardingScreen: UIViewController {
-    var onFinish: (() -> Void)? { get set }
+    var delegate: OnboardingCoordinatorDelegate? { get set }
 }
 
 public protocol TabBarController: UITabBarController {
     var onViewDidLoad: ((UINavigationController) -> ())? { get set }
-    var onItemFlowSelect: ((UINavigationController) -> ())? { get set }
+//    var onItemFlowSelect: ((UINavigationController) -> ())? { get set }
     //  var onSettingsFlowSelect: ((UINavigationController) -> ())? { get set }
 }
 

@@ -7,6 +7,10 @@
 
 import Foundation
 
-public protocol OnboardingCoordinatorResult: class {
-  var finishFlow: (() -> Void)? { get set }
+public protocol OnboardingCoordinatorProtocol: OnboardingCoordinatorDelegate {
+    var finishFlow: (() -> Void)? { get set }
+}
+
+public protocol OnboardingCoordinatorDelegate: AnyObject {
+    func finishOnboarding()
 }
