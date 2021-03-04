@@ -16,7 +16,7 @@ open class BaseCoordinator: CoordinatorProtocol {
         self.router = router
     }
 
-    public func start(with option: DeepLinkOption? = nil) {}
+    open func start(with option: DeepLinkOption? = nil) {}
 
     // add only unique object - refactor into Set
     func addDependency(_ coordinator: CoordinatorProtocol) {
