@@ -15,7 +15,7 @@ class OnboardingCoordinator: BaseCoordinator, OnboardingCoordinatorProtocol {
 
     func showOnboarding() {
         let onboardingViewController = factory.makeOnboardingController()
-        onboardingViewController.delegate = self
+        onboardingViewController.onboardingDelegate = self
         router.setRootModule(onboardingViewController)
     }
     

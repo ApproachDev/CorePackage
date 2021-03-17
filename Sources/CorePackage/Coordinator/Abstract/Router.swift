@@ -38,16 +38,16 @@ public final class Router: NSObject, RouterProtocol {
     }
 
     func popModule(animated: Bool = true)  {
-        if let controller = rootController?.popViewController(animated: animated) {
+//        if let controller = rootController?.popViewController(animated: animated) {
             //      runCompletion(for: controller)
-        }
+//        }
     }
 
     func popToRootModule(animated: Bool) {
-        if let controllers = rootController?.popToRootViewController(animated: animated) {
+//        if let controllers = rootController?.popToRootViewController(animated: animated) {
             //      controllers.forEach { controller in
             //        runCompletion(for: controller)
             //      }
-        }
+//        }
     }
 }

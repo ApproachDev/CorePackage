@@ -18,7 +18,7 @@ class AuthCoordinator: BaseCoordinator, AuthenticationCoordinatorProtocol {
     func showLogin() {
         //check if login vc exists - in case of going back from signup
         let loginViewController = factory.makeLogInViewController()
-        loginViewController.delegate = self
+        loginViewController.loginDelegate = self
         router.setRootModule(loginViewController)
     }
 

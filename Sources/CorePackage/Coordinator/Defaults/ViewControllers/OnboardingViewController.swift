@@ -3,15 +3,14 @@
 //
 
 import UIKit
-import CorePackage
 
 class OnboardingViewController: UIViewController, OnboardingScreen {
 
-    var delegate: OnboardingCoordinatorDelegate?
+    var onboardingDelegate: OnboardingCoordinatorDelegate?
 
     lazy var finishOnboardingButton: Button = {
         let buttonAction: () -> Void = { [weak self] in
-            self?.delegate?.finishOnboarding()
+            self?.onboardingDelegate?.finishOnboarding()
         }
 
         let button = Button(action: buttonAction)

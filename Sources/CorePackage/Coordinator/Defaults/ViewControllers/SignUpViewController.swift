@@ -6,11 +6,11 @@ import UIKit
 
 class SignupViewController: UIViewController, SignupScreen {
     
-    weak var delegate: AuthCoordinatorDelegate?
+    weak var signupDelegate: AuthCoordinatorDelegate?
 
     lazy var signUpButton: Button = {
         let buttonAction: () -> Void = { [weak self] in
-            self?.delegate?.completeSignUp()
+            self?.signupDelegate?.completeSignUp()
         }
         let button = Button(action: buttonAction)
         button.setTitle("Sign Up", for: .normal)
