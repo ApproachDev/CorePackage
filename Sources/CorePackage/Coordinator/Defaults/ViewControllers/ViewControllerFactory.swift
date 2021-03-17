@@ -35,15 +35,15 @@ public extension ViewControllerFactoryProtocol {
 }
 
 public protocol SignupScreen: UIViewController {
-    var delegate: AuthCoordinatorDelegate? { get set }
+    var signupDelegate: AuthCoordinatorDelegate? { get set }
 }
 
 public protocol LoginScreen: UIViewController {
-    var delegate: AuthCoordinatorDelegate? { get set }
+    var loginDelegate: AuthCoordinatorDelegate? { get set }
 }
 
 public protocol OnboardingScreen: UIViewController {
-    var delegate: OnboardingCoordinatorDelegate? { get set }
+    var onboardingDelegate: OnboardingCoordinatorDelegate? { get set }
 }
 
 //MARK:- FACTORY
