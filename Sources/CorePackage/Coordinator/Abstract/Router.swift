@@ -18,7 +18,7 @@ public final class Router: NSObject, RouterProtocol {
         rootController?.isNavigationBarHidden = hideBar
     }
 
-    func present(_ controller: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
+    public func present(_ controller: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
         rootController?.present(controller, animated: animated, completion: completion)
     }
 

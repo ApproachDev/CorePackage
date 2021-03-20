@@ -16,16 +16,14 @@ class AuthCoordinator: BaseCoordinator, AuthenticationCoordinatorProtocol {
     //MARK: - Subflows
 
     func showLogin() {
-        //check if login vc exists - in case of going back from signup
         let loginViewController = factory.makeLogInViewController()
         loginViewController.loginDelegate = self
         router.setRootModule(loginViewController)
     }
 
     func showSignUp() {
-        //check if signup vc exists - in case of going back from login
         let signUpView = factory.makeSignUpViewController()
-        router.push(signUpView)
+        router.setRootModule(signUpView)
     }
 
     func completeLogin() {
