@@ -11,7 +11,7 @@ open class BaseCoordinator: CoordinatorProtocol {
 
     public var childCoordinators: [CoordinatorProtocol] = [] //TODO: Refactor into Set
 
-    public init(router: Router, factory: ViewControllerFactoryProtocol = ViewControllerFactory()){
+    public init(router: Router, factory: ViewControllerFactoryProtocol = CPDefaultViewControllerFactory()){
         self.factory = factory
         self.router = router
     }

@@ -47,6 +47,6 @@ public protocol OnboardingScreen: UIViewController {
 }
 
 //MARK:- FACTORY
-public class ViewControllerFactory: ViewControllerFactoryProtocol {
+public class CPDefaultViewControllerFactory: ViewControllerFactoryProtocol {
     public init() {}
 }

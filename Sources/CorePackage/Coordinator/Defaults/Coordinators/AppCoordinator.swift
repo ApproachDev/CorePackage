@@ -7,8 +7,10 @@ import Foundation
 public final class ApplicationCoordinator: BaseCoordinator {
 
     private let coordinatorFactory: CoordinatorFactoryProtocol
+    private let appStateManager: AppStateManagerProtocol
 
-    public init(router: Router, factory: CoordinatorFactoryProtocol) {
+    public init(router: Router, factory: CoordinatorFactoryProtocol, appStateManager: AppStateManagerProtocol) {
+        self.appStateManager = appStateManager
         self.coordinatorFactory = factory
         super.init(router: router)
     }
@@ -23,11 +25,11 @@ public final class ApplicationCoordinator: BaseCoordinator {
                 }
             }
         } else {
-            runDependOn(flowInstruction: AppState.shared.flowInstruction)
+            runDependOn(flowInstruction: appStateManager.flowInstruction)
         }
     }
 
-    private func runDependOn(flowInstruction: AppState.FlowInstruction) {
+    private func runDependOn(flowInstruction: FlowInstruction) {
         switch flowInstruction {
             case .onboarding: runOnboardingFlow()
             case .auth: runAuthFlow()
@@ -38,7 +40,6 @@ public final class ApplicationCoordinator: BaseCoordinator {
     private func runAuthFlow() {
         let coordinator = coordinatorFactory.makeAuthCoordinator(router: router)
         coordinator.finishFlow = { [weak self, weak coordinator] in
-            AppState.shared.setAuthorized(true)
             self?.start(with: nil)
             self?.removeDependency(coordinator)
         }
@@ -49,7 +50,7 @@ public final class ApplicationCoordinator: BaseCoordinator {
     private func runOnboardingFlow() {
         let coordinator = coordinatorFactory.makeOnboardingCoordinator(router: router)
         coordinator.finishFlow = { [weak self, weak coordinator] in
-            AppState.shared.onboardingDidShow()
+            self?.appStateManager.onboardingDidShow()
             self?.start(with: nil)
             self?.removeDependency(coordinator)
         }
