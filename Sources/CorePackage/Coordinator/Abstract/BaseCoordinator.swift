@@ -18,7 +18,6 @@ open class BaseCoordinator: CoordinatorProtocol {
 
     open func start(with option: DeepLinkOption? = nil) {}
 
-    // add only unique object - refactor into Set
     func addDependency(_ coordinator: CoordinatorProtocol) {
         guard !childCoordinators.contains(where: { $0 === coordinator }) else { return }
         childCoordinators.append(coordinator)
@@ -30,7 +29,7 @@ open class BaseCoordinator: CoordinatorProtocol {
 
         if let coordinator = coordinator as? BaseCoordinator, !coordinator.childCoordinators.isEmpty {
             coordinator.childCoordinators
-                .filter({ $0 !== coordinator }) // Investigate
+                .filter({ $0 !== coordinator })
                 .forEach({ coordinator.removeDependency($0) })
         }
 

@@ -7,7 +7,7 @@ import UIKit
 public extension UIView {
     func centerInSuperview() {
         guard let superview = superview else {
-            return //add assert
+            return
         }
 
         translatesAutoresizingMaskIntoConstraints = false
